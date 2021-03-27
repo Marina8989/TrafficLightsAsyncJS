@@ -9,7 +9,7 @@ const turnOffLight = (currentLight) => {
 }
 
 const changeList = () => {
-     return new Promise((res, reject) => {
+     return new Promise((res, rej) => {
          let currentLight = lights[active];
          if(active === 0) {
            switchLight(currentLight);
@@ -18,6 +18,23 @@ const changeList = () => {
                active=1;
                res(active)
            }, 1000);
+         }
+
+         if(active === 1) {
+           switchLight(currentLight);
+           setTimeout(() => {
+             turnOffLight(currentLight);
+             active=2;
+             res(active);
+           }, 2000);
+         }
+         if(active === 2) {
+           switchLight(currentLight);
+           setTimeout(() => {
+               turnOffLight(currentLight);
+               active=3;
+               res(active);
+           }, 2000);
          }
      })
 }
